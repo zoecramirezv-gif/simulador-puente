@@ -2,15 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telemetría LTW - Puente Atirantado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Telemetría de Tensión estructural - Puente Univalle</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="dashboard">
         <header>
-            <h1>ANÁLISIS ESTÁTICO EN TIEMPO REAL</h1>
-            <p>Sistema de Adquisición de Datos HX711 - Univalle</p>
+            <h1>ANÁLISIS ESTÁTICO DE TENSIONES</h1>
+            <p>Sistema de Telemetría HX711 + Arduino - Grupo LTW</p>
         </header>
 
         <div class="panels-container">
@@ -23,7 +22,7 @@
                 </div>
                 
                 <div class="input-group">
-                    <label>Posición en el vano (cm): <span id="pos-display" class="highlight">30</span> cm</label>
+                    <label>Posición en el Vano (cm): <span id="pos-display" class="highlight">30</span> cm</label>
                     <input type="range" id="pos-slider" min="0" max="60" step="1" value="30">
                 </div>
                 
@@ -39,8 +38,8 @@
                         <line id="vector-a" class="force-vector" x1="10%" y1="150" x2="10%" y2="150" marker-end="url(#arrow)" />
                         <line id="vector-b" class="force-vector" x1="90%" y1="150" x2="90%" y2="150" marker-end="url(#arrow)" />
                         
-                        <line id="cable-a" class="cable" x1="10%" y1="150" x2="50%" y2="280" />
-                        <line id="cable-b" class="cable" x1="90%" y1="150" x2="50%" y2="280" />
+                        <line id="cable-a" class="cable" x1="10%" y1="50" x2="50%" y2="212" />
+                        <line id="cable-b" class="cable" x1="90%" y1="50" x2="50%" y2="212" />
 
                         <defs>
                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
