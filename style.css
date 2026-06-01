@@ -24,18 +24,19 @@ body {
     padding: 20px;
 }
 
-.dashboard { width: 100%; max-width: 1400px; padding: 10px; }
+/* Limitamos a 1200px para que los paneles no se estiren en exceso en pantallas gigantes */
+.dashboard { width: 100%; max-width: 1200px; padding: 10px; }
 
-header { text-align: center; margin-bottom: 30px; }
+header { text-align: center; margin-bottom: 20px; }
 header h1 { font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); letter-spacing: 2px; font-size: 1.8rem; }
 header p { color: #8b949e; margin-top: 5px; font-size: 0.9rem; }
 
-/* Contenedor adaptativo principal - FIXED FOR MOBILE */
+/* LA SOLUCIÓN ESTRUCTURAL AQUÍ */
 .panels-container { 
     display: flex; 
-    flex-direction: row; /* Fila por defecto para PC */
-    gap: 20px; 
-    flex-wrap: wrap; /* Permite saltos de línea */
+    flex-direction: row; 
+    justify-content: space-between; /* Distribuye el espacio sobrante equitativamente */
+    align-items: stretch; /* Obliga a los 3 paneles a tener la misma altura total */
 }
 
 .glass-panel {
@@ -43,36 +44,37 @@ header p { color: #8b949e; margin-top: 5px; font-size: 0.9rem; }
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     backdrop-filter: blur(10px);
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* Distribución de paneles en escritorio */
-.control-panel, .sensor-panel { width: calc(25% - 10px); display: flex; flex-direction: column; gap: 20px; }
-.simulation-panel { width: calc(50% - 10px); position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 400px; }
+/* Anchos fijos en porcentajes seguros que no rompen la fila (24% + 48% + 24% = 96%) */
+.control-panel, .sensor-panel { width: 24%; display: flex; flex-direction: column; gap: 15px; }
+.simulation-panel { width: 48%; position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 400px; }
 
-h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; border-bottom: 1px solid var(--univalle-guindo); padding-bottom: 10px; }
+h2 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; border-bottom: 1px solid var(--univalle-guindo); padding-bottom: 10px; }
 
-.input-group label { display: block; margin-bottom: 10px; font-weight: 300; }
+.input-group label { display: block; margin-bottom: 10px; font-weight: 300; font-size: 0.9rem; }
 .highlight { color: var(--neon-cyan); font-weight: bold; }
 
 input[type=range] {
-    width: 100%; appearance: none; background: #2d3342; height: 8px; border-radius: 4px; outline: none;
+    width: 100%; appearance: none; background: #2d3342; height: 6px; border-radius: 3px; outline: none;
 }
 input[type=range]::-webkit-slider-thumb {
-    appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--univalle-guindo); cursor: pointer; box-shadow: 0 0 10px var(--guindo-light); transition: 0.2s;
+    appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--univalle-guindo); cursor: pointer; box-shadow: 0 0 10px var(--guindo-light); transition: 0.2s;
 }
 input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
 
 .telemetry-box, .equation-box {
     background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; border-left: 4px solid var(--univalle-guindo); text-align: center; margin-top: auto;
 }
-.telemetry-box h3 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #fff; margin-top: 5px; }
+.telemetry-box p, .equation-box p { font-size: 0.9rem; }
+.telemetry-box h3 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; margin-top: 5px; }
 
-/* Área de Simulación - FIXED COORDINATES */
+/* Área del Puente Visual */
 #bridge-container { position: relative; width: 100%; height: 350px; }
-
 #bridge-svg { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+
 .cable { stroke: #cbd5e1; stroke-width: 2; transition: all 0.1s linear; }
 .force-vector { stroke: var(--neon-cyan); stroke-width: 4; transition: all 0.1s linear; }
 
@@ -90,56 +92,46 @@ input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); bo
     border-radius: 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2;
 }
 
-/* El bloque de masa amarillo se escalará en JS */
 .mass {
     position: absolute; 
-    bottom: 92px; /* Alineado justo arriba del deck */
-    left: 50%; 
-    transform: translateX(-50%); 
-    z-index: 10;
+    bottom: 92px; left: 50%; 
+    transform: translateX(-50%); z-index: 10;
     display: flex; justify-content: center; align-items: center;
     color: #000; font-weight: bold; font-family: 'Orbitron', sans-serif;
     box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); border: 2px solid #ca8a04;
-    transition: all 0.1s ease-out; /* Animación suave de tamaño y color */
+    transition: all 0.1s ease-out; 
 }
 
 /* Pantallas Digitales */
-.sensor-readout { margin-bottom: 15px; }
+.sensor-readout { margin-bottom: 10px; }
+.sensor-readout p { font-size: 0.9rem; }
 .digital-display {
-    background: #000; color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-size: 1.5rem; padding: 10px; text-align: center; border-radius: 5px; border: 1px solid #1f2937; margin: 5px 0; letter-spacing: 1px;
+    background: #000; color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-size: 1.2rem; padding: 10px; text-align: center; border-radius: 5px; border: 1px solid #1f2937; margin: 5px 0; letter-spacing: 1px;
 }
-.bar-container { width: 100%; background: #1f2937; height: 8px; border-radius: 4px; overflow: hidden; }
+.bar-container { width: 100%; background: #1f2937; height: 6px; border-radius: 3px; overflow: hidden; }
 .bar { height: 100%; width: 50%; transition: width 0.1s linear; }
 .fill-guindo { background: var(--univalle-guindo); box-shadow: 0 0 8px var(--guindo-light); }
-.success-text { color: var(--neon-cyan); font-size: 0.9rem; margin-top: 5px; font-weight: bold; }
+.success-text { color: var(--neon-cyan); font-size: 0.8rem; margin-top: 5px; font-weight: bold; }
 
-/* MEDIA QUERY PARA CELULARES - FIXED MOBILE DISPLAY */
+
+/* RESPONSIVO PARA CELULARES - Aquí se apilan en modo columna sin afectar PC */
 @media (max-width: 900px) {
-    body {
-        align-items: flex-start; /* Permite scroll vertical fluido */
-    }
-
+    body { padding: 10px; align-items: flex-start; }
+    
     .panels-container {
-        flex-direction: column; /* Apila los paneles verticalmente */
-        gap: 15px;
+        flex-direction: column; /* Apila todo en el celular */
     }
 
     .control-panel, .simulation-panel, .sensor-panel {
-        width: 100%; /* Ocupan todo el ancho */
+        width: 100%; /* Toma todo el ancho en el celular */
     }
 
     .simulation-panel {
-        order: -1; /* El puente visual va arriba del todo */
+        order: -1; /* Mueve el puente visual arriba */
         min-height: 380px;
     }
-
-    #bridge-container {
-        height: 320px;
-    }
-
-    /* Agrandar los botones táctiles del slider para que sea fácil moverlos con el dedo */
+    
     input[type=range]::-webkit-slider-thumb {
-        width: 28px;
-        height: 28px;
+        width: 25px; height: 25px; /* Más grande en móvil para tocarlo fácil */
     }
 }
