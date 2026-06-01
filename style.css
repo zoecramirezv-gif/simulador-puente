@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --bg-dark: #0f111a;
+    --univalle-guindo: #800000;
+    --guindo-light: #b30000;
+    --neon-cyan: #00ffcc;
+    --text-main: #e2e8f0;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(circle at 50% 0%, #1f2233 0%, #0f111a 70%);
+}
+
+.dashboard { width: 95%; max-width: 1400px; padding: 20px; }
+
+header { text-align: center; margin-bottom: 30px; }
+header h1 { font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); letter-spacing: 2px; }
+header p { color: #8b949e; margin-top: 5px; }
+
+.panels-container { display: flex; gap: 20px; height: 600px; }
+
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Control & Sensor Panels */
+.control-panel, .sensor-panel { width: 25%; display: flex; flex-direction: column; gap: 20px; }
+h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; border-bottom: 1px solid var(--univalle-guindo); padding-bottom: 10px; }
+
+.input-group label { display: block; margin-bottom: 10px; font-weight: 300; }
+.highlight { color: var(--neon-cyan); font-weight: bold; }
+
+input[type=range] {
+    width: 100%; appearance: none; background: #2d3342; height: 6px; border-radius: 3px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--univalle-guindo); cursor: pointer; box-shadow: 0 0 10px var(--guindo-light); transition: 0.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+
+.telemetry-box, .equation-box {
+    background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; border-left: 4px solid var(--univalle-guindo); text-align: center; margin-top: auto;
+}
+.telemetry-box h3 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #fff; margin-top: 5px; }
+
+/* Simulador Central */
+.simulation-panel { width: 50%; position: relative; display: flex; flex-direction: column; justify-content: center; }
+#bridge-container { position: relative; width: 100%; height: 400px; }
+
+#bridge-svg { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+.cable { stroke: #cbd5e1; stroke-width: 2; transition: all 0.1s linear; }
+.force-vector { stroke: var(--neon-cyan); stroke-width: 4; transition: all 0.1s linear; }
+
+.pillar {
+    position: absolute; bottom: 50px; width: 30px; height: 250px;
+    background: linear-gradient(90deg, #4a0000 0%, var(--univalle-guindo) 50%, #4a0000 100%);
+    border-radius: 4px 4px 0 0; box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+}
+.pillar.left { left: 10%; transform: translateX(-50%); }
+.pillar.right { left: 90%; transform: translateX(-50%); }
+
+.deck {
+    position: absolute; bottom: 100px; left: 5%; width: 90%; height: 12px;
+    background: linear-gradient(180deg, #64748b 0%, #334155 100%);
+    border-radius: 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2;
+}
+
+.mass {
+    position: absolute; bottom: 112px; width: 50px; height: 50px;
+    background: #eab308; border-radius: 4px;
+    left: 50%; transform: translateX(-50%); z-index: 10;
+    display: flex; justify-content: center; align-items: center;
+    color: #000; font-weight: bold; font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); border: 2px solid #ca8a04;
+}
+
+/* Pantallas Digitales */
+.sensor-readout { margin-bottom: 15px; }
+.digital-display {
+    background: #000; color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-size: 1.5rem; padding: 10px; text-align: center; border-radius: 5px; border: 1px solid #1f2937; margin: 5px 0; letter-spacing: 1px;
+}
+.bar-container { width: 100%; background: #1f2937; height: 8px; border-radius: 4px; overflow: hidden; }
+.bar { height: 100%; width: 50%; transition: width 0.1s linear; }
+.fill-guindo { background: var(--univalle-guindo); box-shadow: 0 0 8px var(--guindo-light); }
+.success-text { color: var(--neon-cyan); font-size: 0.9rem; margin-top: 5px; font-weight: bold; }

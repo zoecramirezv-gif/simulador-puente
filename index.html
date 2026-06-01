@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemetría LTW - Puente Atirantado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>ANÁLISIS ESTÁTICO EN TIEMPO REAL</h1>
+            <p>Sistema de Adquisición de Datos HX711 - Univalle</p>
+        </header>
+
+        <div class="panels-container">
+            <div class="control-panel glass-panel">
+                <h2>Parámetros de Carga</h2>
+                
+                <div class="input-group">
+                    <label>Masa del Móvil (kg): <span id="mass-display" class="highlight">1.5</span> kg</label>
+                    <input type="range" id="mass-slider" min="0" max="5" step="0.1" value="1.5">
+                </div>
+                
+                <div class="input-group">
+                    <label>Posición en el vano (cm): <span id="pos-display" class="highlight">30</span> cm</label>
+                    <input type="range" id="pos-slider" min="0" max="60" step="1" value="30">
+                </div>
+                
+                <div class="telemetry-box">
+                    <p>Fuerza Externa Aplicada ($W_{carga}$):</p>
+                    <h3 id="weight-display">14.71 N</h3>
+                </div>
+            </div>
+
+            <div class="simulation-panel glass-panel">
+                <div id="bridge-container">
+                    <svg id="bridge-svg" width="100%" height="100%">
+                        <line id="vector-a" class="force-vector" x1="10%" y1="150" x2="10%" y2="150" marker-end="url(#arrow)" />
+                        <line id="vector-b" class="force-vector" x1="90%" y1="150" x2="90%" y2="150" marker-end="url(#arrow)" />
+                        
+                        <line id="cable-a" class="cable" x1="10%" y1="150" x2="50%" y2="280" />
+                        <line id="cable-b" class="cable" x1="90%" y1="150" x2="50%" y2="280" />
+
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#00ffcc" />
+                            </marker>
+                        </defs>
+                    </svg>
+
+                    <div class="pillar left"></div>
+                    <div class="pillar right"></div>
+                    <div class="deck"></div>
+                    <div id="mass-block" class="mass">1.5kg</div>
+                </div>
+            </div>
+
+            <div class="sensor-panel glass-panel">
+                <h2>Lectura de Sensores</h2>
+                
+                <div class="sensor-readout">
+                    <p>Pilar Izquierdo ($T_A$)</p>
+                    <div class="digital-display" id="sensor-a-val">7.35 N</div>
+                    <div class="bar-container"><div id="bar-a" class="bar fill-guindo"></div></div>
+                </div>
+
+                <div class="sensor-readout">
+                    <p>Pilar Derecho ($T_B$)</p>
+                    <div class="digital-display" id="sensor-b-val">7.35 N</div>
+                    <div class="bar-container"><div id="bar-b" class="bar fill-guindo"></div></div>
+                </div>
+                
+                <div class="equation-box">
+                    <p>$\Sigma F_y = T_A + T_B - W_{carga} = 0$</p>
+                    <p id="equilibrium-check" class="success-text">Equilibrio Confirmado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
