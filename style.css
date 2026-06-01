@@ -21,15 +21,21 @@ body {
     justify-content: center;
     align-items: center;
     background-image: radial-gradient(circle at 50% 0%, #1f2233 0%, #0f111a 70%);
+    padding: 10px;
 }
 
-.dashboard { width: 95%; max-width: 1400px; padding: 20px; }
+.dashboard { width: 100%; max-width: 1400px; padding: 10px; }
 
-header { text-align: center; margin-bottom: 30px; }
-header h1 { font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); letter-spacing: 2px; }
-header p { color: #8b949e; margin-top: 5px; }
+header { text-align: center; margin-bottom: 25px; }
+header h1 { font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); letter-spacing: 2px; font-size: 1.8rem; }
+header p { color: #8b949e; margin-top: 5px; font-size: 0.9rem; }
 
-.panels-container { display: flex; gap: 20px; height: 600px; }
+/* Contenedor adaptativo principal */
+.panels-container { 
+    display: flex; 
+    flex-direction: row; /* Por defecto en fila para PC */
+    gap: 20px; 
+}
 
 .glass-panel {
     background: var(--glass-bg);
@@ -40,18 +46,21 @@ header p { color: #8b949e; margin-top: 5px; }
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* Control & Sensor Panels */
+/* Distribución de paneles en escritorio */
 .control-panel, .sensor-panel { width: 25%; display: flex; flex-direction: column; gap: 20px; }
+.simulation-panel { width: 50%; position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 400px; }
+
 h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; border-bottom: 1px solid var(--univalle-guindo); padding-bottom: 10px; }
 
 .input-group label { display: block; margin-bottom: 10px; font-weight: 300; }
 .highlight { color: var(--neon-cyan); font-weight: bold; }
 
+/* Optimización de los sliders */
 input[type=range] {
-    width: 100%; appearance: none; background: #2d3342; height: 6px; border-radius: 3px; outline: none;
+    width: 100%; appearance: none; background: #2d3342; height: 10px; border-radius: 5px; outline: none;
 }
 input[type=range]::-webkit-slider-thumb {
-    appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--univalle-guindo); cursor: pointer; box-shadow: 0 0 10px var(--guindo-light); transition: 0.2s;
+    appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--univalle-guindo); cursor: pointer; box-shadow: 0 0 10px var(--guindo-light); transition: 0.2s;
 }
 input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
 
@@ -60,16 +69,15 @@ input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); bo
 }
 .telemetry-box h3 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #fff; margin-top: 5px; }
 
-/* Simulador Central */
-.simulation-panel { width: 50%; position: relative; display: flex; flex-direction: column; justify-content: center; }
-#bridge-container { position: relative; width: 100%; height: 400px; }
+/* Área del Puente */
+#bridge-container { position: relative; width: 100%; height: 350px; }
 
 #bridge-svg { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
 .cable { stroke: #cbd5e1; stroke-width: 2; transition: all 0.1s linear; }
 .force-vector { stroke: var(--neon-cyan); stroke-width: 4; transition: all 0.1s linear; }
 
 .pillar {
-    position: absolute; bottom: 50px; width: 30px; height: 250px;
+    position: absolute; bottom: 30px; width: 25px; height: 220px;
     background: linear-gradient(90deg, #4a0000 0%, var(--univalle-guindo) 50%, #4a0000 100%);
     border-radius: 4px 4px 0 0; box-shadow: 5px 0 15px rgba(0,0,0,0.5);
 }
@@ -77,18 +85,19 @@ input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); bo
 .pillar.right { left: 90%; transform: translateX(-50%); }
 
 .deck {
-    position: absolute; bottom: 100px; left: 5%; width: 90%; height: 12px;
+    position: absolute; bottom: 80px; left: 5%; width: 90%; height: 12px;
     background: linear-gradient(180deg, #64748b 0%, #334155 100%);
     border-radius: 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2;
 }
 
 .mass {
-    position: absolute; bottom: 112px; width: 50px; height: 50px;
+    position: absolute; bottom: 92px; width: 46px; height: 46px;
     background: #eab308; border-radius: 4px;
     left: 50%; transform: translateX(-50%); z-index: 10;
     display: flex; justify-content: center; align-items: center;
     color: #000; font-weight: bold; font-family: 'Orbitron', sans-serif;
     box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); border: 2px solid #ca8a04;
+    font-size: 0.85rem;
 }
 
 /* Pantallas Digitales */
@@ -100,3 +109,45 @@ input[type=range]::-webkit-slider-thumb:hover { background: var(--neon-cyan); bo
 .bar { height: 100%; width: 50%; transition: width 0.1s linear; }
 .fill-guindo { background: var(--univalle-guindo); box-shadow: 0 0 8px var(--guindo-light); }
 .success-text { color: var(--neon-cyan); font-size: 0.9rem; margin-top: 5px; font-weight: bold; }
+
+
+/* ==========================================================================
+   MEDIA QUERY PARA CELULARES Y TABLETS (Pantallas menores a 900px)
+   ========================================================================== */
+@media (max-width: 900px) {
+    body {
+        align-items: flex-start; /* Permite scroll vertical fluido */
+    }
+
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    .panels-container {
+        flex-direction: column; /* Apila los paneles uno debajo del otro */
+        height: auto;
+    }
+
+    .control-panel, .simulation-panel, .sensor-panel {
+        width: 100%; /* Todos ocupan el ancho completo del celular */
+    }
+
+    .simulation-panel {
+        order: -1; /* Mueve el puente visual arriba del todo para que sea lo primero que se vea */
+        min-height: 380px;
+    }
+
+    #bridge-container {
+        height: 320px;
+    }
+
+    /* Agrandar los botones táctiles del slider para que sea fácil moverlos con el dedo */
+    input[type=range]::-webkit-slider-thumb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .telemetry-box, .equation-box {
+        margin-top: 15px; /* Separa los boxes en móvil */
+    }
+}
