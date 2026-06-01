@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telemetría LTW - Puente Univalle</title>
     <link rel="stylesheet" href="style.css">
-    
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-      window.MathJax = {
-        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-      };
-    </script>
 </head>
 <body>
     <div class="dashboard">
@@ -36,7 +28,7 @@
                 </div>
                 
                 <div class="telemetry-box">
-                    <p>Fuerza Externa Aplicada ($W_{carga}$):</p>
+                    <p>Fuerza Externa Aplicada (W<sub>carga</sub>):</p>
                     <h3 id="weight-display">14.71 N</h3>
                 </div>
             </div>
@@ -68,19 +60,19 @@
                 <h2>Lectura de Sensores</h2>
                 
                 <div class="sensor-readout">
-                    <p>Pilar Izquierdo ($T_A$)</p>
+                    <p>Pilar Izquierdo (T<sub>A</sub>)</p>
                     <div class="digital-display" id="sensor-a-val">7.35 N</div>
                     <div class="bar-container"><div id="bar-a" class="bar fill-guindo"></div></div>
                 </div>
 
                 <div class="sensor-readout">
-                    <p>Pilar Derecho ($T_B$)</p>
+                    <p>Pilar Derecho (T<sub>B</sub>)</p>
                     <div class="digital-display" id="sensor-b-val">7.35 N</div>
                     <div class="bar-container"><div id="bar-b" class="bar fill-guindo"></div></div>
                 </div>
                 
                 <div class="equation-box">
-                    <p>$\Sigma F_y = T_A + T_B - W_{carga} = 0$</p>
+                    <p>&Sigma;F<sub>y</sub> = T<sub>A</sub> + T<sub>B</sub> - W<sub>carga</sub> = 0</p>
                     <p id="equilibrium-check" class="success-text">Equilibrio Confirmado</p>
                 </div>
             </div>
